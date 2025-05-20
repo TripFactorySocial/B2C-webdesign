@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyJourney - Modern Flight Search</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="hero-section">
+      <div class="background-image"></div>
+
+      <!-- Header -->
+      <header>
+        <a href="#" class="logo">
+          <img
+            src="https://holidays91.com/wp-content/uploads/2024/08/Holidays91-3.png"
+            alt="Holidays91 Logo"
+            width="150"
+          />
+        </a>
+        <div class="auth-buttons">
+          <a href="#" class="auth-button login">Login</a>
+          <a href="#" class="auth-button signup">Sign Up</a>
+        </div>
+      </header>
+
+      <!-- Search Widget -->
+      <div class="search-container">
+        <div class="search-widget">
+          <div class="search-tabs">
+            <div class="tab active" data-tab="one-way">One-way</div>
+            <div class="tab" data-tab="round-trip">Round-trip</div>
+            <!-- Multi-city tab removed -->
+          </div>
+
+          <!-- One-way search content -->
+          <div class="search-content active" id="one-way">
+            <div class="search-row">
+              <div class="search-field">
+                <label for="from-airport-1">From</label>
+                <input
+                  type="text"
+                  id="from-airport-1"
+                  class="search-input"
+                  placeholder="City or Airport"
+                />
+              </div>
+
+              <div class="search-field" style="position: relative">
+                <button class="swap-btn">
+                  <i class="fas fa-exchange-alt"></i>
+                </button>
+                <label for="to-airport-1">To</label>
+                <input
+                  type="text"
+                  id="to-airport-1"
+                  class="search-input"
+                  placeholder="City or Airport"
+                />
+              </div>
+
+              <div class="search-field">
+                <label for="departure-date-1">Departure</label>
+                <input
+                  type="text"
+                  id="departure-date-1"
+                  class="search-input date-picker"
+                  placeholder="Select Date"
+                />
+              </div>
+
+              <div class="search-field">
+                <label for="return-date-1">Return</label>
+                <input
+                  type="text"
+                  id="return-date-1"
+                  class="search-input date-picker return-clickable"
+                  placeholder="Need a return flight?"
+                  style="background-color: #f5f5f5; cursor: pointer"
+                  readonly
+                />
+              </div>
+
+              <div class="search-field dropdown">
+                <label for="passengers-1">Passengers & Class</label>
+                <input
+                  type="text"
+                  id="passengers-1"
+                  class="search-input"
+                  placeholder="1 Adult, Economy"
+                  readonly
+                />
+
+                <div class="dropdown-content">
+                  <div class="passenger-type">
+                    <span>Adults (12+ years)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">1</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="passenger-type">
+                    <span>Children (2-11 years)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">0</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="passenger-type">
+                    <span>Infants (0-23 months)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">0</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="cabin-class">
+                    <label>Cabin Class</label>
+                    <div class="radio-group">
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-1"
+                          value="economy"
+                          checked
+                        />
+                        <span>Economy</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-1"
+                          value="premium"
+                        />
+                        <span>Premium</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-1"
+                          value="business"
+                        />
+                        <span>Business</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-1"
+                          value="first"
+                        />
+                        <span>First</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="special-offers-container">
+              <!-- <div class="offer-option">
+                <input
+                  type="radio"
+                  id="regular-1"
+                  name="offer-1"
+                  class="offer-radio"
+                  checked
+                  hidden
+                />
+                <label for="regular-1" class="offer-label">
+                  <div class="offer-title">Regular</div>
+                  <div class="offer-subtitle">Regular fares</div>
+                </label>
+              </div> -->
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="student-1"
+                  name="offer-1"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="student-1" class="offer-label">
+                  <div class="offer-title">Student</div>
+                  <div class="offer-subtitle">Extra discounts/baggage</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="senior-1"
+                  name="offer-1"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="senior-1" class="offer-label">
+                  <div class="offer-title">Senior Citizen</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="armed-1"
+                  name="offer-1"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="armed-1" class="offer-label">
+                  <div class="offer-title">Armed Forces</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="doctor-1"
+                  name="offer-1"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="doctor-1" class="offer-label">
+                  <div class="offer-title">Doctor and Nurses</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+            </div>
+
+            <button class="search-button">
+              <i class="fas fa-search"></i> Search Flights
+            </button>
+          </div>
+
+          <!-- Round-trip search content -->
+          <div class="search-content" id="round-trip">
+            <div class="search-row">
+              <div class="search-field">
+                <label for="from-airport-2">From</label>
+                <input
+                  type="text"
+                  id="from-airport-2"
+                  class="search-input"
+                  placeholder="City or Airport"
+                />
+              </div>
+
+              <div class="search-field" style="position: relative">
+                <button class="swap-btn">
+                  <i class="fas fa-exchange-alt"></i>
+                </button>
+                <label for="to-airport-2">To</label>
+                <input
+                  type="text"
+                  id="to-airport-2"
+                  class="search-input"
+                  placeholder="City or Airport"
+                />
+              </div>
+
+              <div class="search-field">
+                <label for="departure-date-2">Departure</label>
+                <input
+                  type="text"
+                  id="departure-date-2"
+                  class="search-input date-picker"
+                  placeholder="Select Date"
+                />
+              </div>
+
+              <div class="search-field">
+                <label for="return-date-2">Return</label>
+                <input
+                  type="text"
+                  id="return-date-2"
+                  class="search-input date-picker"
+                  placeholder="Select Date"
+                />
+              </div>
+
+              <div class="search-field dropdown">
+                <label for="passengers-2">Passengers & Class</label>
+                <input
+                  type="text"
+                  id="passengers-2"
+                  class="search-input"
+                  placeholder="1 Adult, Economy"
+                  readonly
+                />
+
+                <div class="dropdown-content">
+                  <div class="passenger-type">
+                    <span>Adults (12+ years)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">1</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="passenger-type">
+                    <span>Children (2-11 years)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">0</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="passenger-type">
+                    <span>Infants (0-23 months)</span>
+                    <div class="passenger-counter">
+                      <div class="counter-btn decrease">-</div>
+                      <div class="counter-value">0</div>
+                      <div class="counter-btn increase">+</div>
+                    </div>
+                  </div>
+
+                  <div class="cabin-class">
+                    <label>Cabin Class</label>
+                    <div class="radio-group">
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-2"
+                          value="economy"
+                          checked
+                        />
+                        <span>Economy</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-2"
+                          value="premium"
+                        />
+                        <span>Premium</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-2"
+                          value="business"
+                        />
+                        <span>Business</span>
+                      </label>
+
+                      <label class="radio-option">
+                        <input
+                          type="radio"
+                          name="cabin-class-2"
+                          value="first"
+                        />
+                        <span>First</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="special-offers-container">
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="regular-2"
+                  name="offer-2"
+                  class="offer-radio"
+                  checked
+                  hidden
+                />
+                <label for="regular-2" class="offer-label">
+                  <div class="offer-title">Regular</div>
+                  <div class="offer-subtitle">Regular fares</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="student-2"
+                  name="offer-2"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="student-2" class="offer-label">
+                  <div class="offer-title">Student</div>
+                  <div class="offer-subtitle">Extra discounts/baggage</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="senior-2"
+                  name="offer-2"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="senior-2" class="offer-label">
+                  <div class="offer-title">Senior Citizen</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="armed-2"
+                  name="offer-2"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="armed-2" class="offer-label">
+                  <div class="offer-title">Armed Forces</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+              <div class="offer-option">
+                <input
+                  type="radio"
+                  id="doctor-2"
+                  name="offer-2"
+                  class="offer-radio"
+                  hidden
+                />
+                <label for="doctor-2" class="offer-label">
+                  <div class="offer-title">Doctor and Nurses</div>
+                  <div class="offer-subtitle">Up to ₹ 600 off</div>
+                </label>
+              </div>
+            </div>
+
+            <button class="search-button">
+              <i class="fas fa-search"></i> Search Flights
+            </button>
+          </div>
+
+          <!-- Multi-city search content completely removed -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+      <i class="fas fa-headset"></i>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="features-container">
+        <h2 class="section-title">Why Fly With Us</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-tag"></i>
+            </div>
+            <h3 class="feature-title">Best Price Guarantee</h3>
+            <p class="feature-desc">
+              Find a lower fare? We'll match it and give you an additional
+              discount.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3 class="feature-title">Worldwide Coverage</h3>
+            <p class="feature-desc">
+              Over 500+ airlines and 2000+ destinations around the world.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <h3 class="feature-title">Flexible Payment</h3>
+            <p class="feature-desc">
+              Multiple payment options and zero hidden charges.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3 class="feature-title">24/7 Support</h3>
+            <p class="feature-desc">
+              Our support team is available round the clock for your assistance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>
