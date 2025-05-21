@@ -191,8 +191,7 @@ header {
 
 /* Make From and To fields wider */
 .search-field:nth-child(1),
-.search-field:nth-child(2),
-.search-field:nth-child(5) {
+.search-field:nth-child(2) {
   flex: 2; /* Double the flex value compared to other fields */
 }
 
@@ -238,7 +237,7 @@ header {
   cursor: pointer;
   position: absolute;
   top: 32px;
-  left: calc(-4% - 18px);
+  left: calc(-4% - 20px);
   z-index: 1;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -273,12 +272,13 @@ header {
   top: 100%;
   left: 0;
   width: 310px;
+  width: 360px;
   background-color: white;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 8px 32px var(--shadow-color);
   z-index: 20;
-  padding: 1rem;
+  padding: 1.5rem;
   margin-top: 0.5rem;
   /* Ensures dropdown is visible even with overflow: hidden elsewhere */
   max-height: 80vh;
@@ -294,8 +294,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.passenger-type:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .passenger-counter {
@@ -305,8 +313,8 @@ header {
 }
 
 .counter-btn {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -325,39 +333,63 @@ header {
   color: var(--primary-color);
 }
 
+.counter-btn:active {
+  background-color: var(--secondary-color);
+  border-color: var(--light-text);
+  color: var(--light-text);
+  animation: rotateFull 0.5s ease;
+}
+
 .counter-value {
   width: 30px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 /* ===== CABIN CLASS ===== */
 .cabin-class {
-  margin-top: 24px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eaeaea;
+  position: relative;
+}
+
+.cabin-class::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background-color: #f0f0f0;
+  border-radius: 2px;
 }
 
 .cabin-class label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-color);
+  text-align: center;
 }
 
 .radio-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-top: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .radio-option {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   cursor: pointer;
   flex: 1;
-  min-width: calc(50% - 4px);
+  max-width: 140px;
 }
 
 .radio-option input[type="radio"] {
@@ -365,28 +397,54 @@ header {
 }
 
 .radio-option span {
-  padding: 8px 12px;
+  padding: 4px 8px;
   border: 1px solid #e0e0e0;
-  border-radius: 20px;
+  border-radius: 12px;
+  border-radius: 24px;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
+
+/* .radio-option span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+} */
 
 .radio-option:hover span {
   border-color: var(--primary-color);
+  background-color: var(--hover-bg);
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .radio-option input[type="radio"]:checked + span {
   background-color: white;
+  background-color: var(--highlight-color);
   color: var(--highlight-color);
+  color: var(--light-text);
   border-color: var(--highlight-color);
   font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
+
+/* .radio-option input[type="radio"]:checked + span::before {
+  background-color: var(--highlight-color);
+} */
 
 /* ===== SPECIAL OFFERS ===== */
 .special-offers-container {
@@ -407,15 +465,13 @@ header {
 }
 
 .offer-option {
-  /* flex: 1; */
+  flex: 1;
   min-width: auto;
 }
 
 .offer-label {
   padding: 8px 16px;
-  /* border: 1px solid var(--primary-color); */
-  /* border: 1px solid var(--highlight-color); */
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--primary-color);
   border-radius: 20px;
   font-size: 13px;
   cursor: pointer;
@@ -430,9 +486,7 @@ header {
 }
 
 .offer-label:hover {
-  /* border-color: var(--highlight-color); */
-  border: 1px solid var(--primary-color);
-  background-color: var(--hover-bg);
+  border-color: var(--highlight-color);
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
@@ -672,6 +726,16 @@ header {
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile cabin class styling */
+  .radio-group {
+    flex-wrap: wrap;
+  }
+
+  .radio-option {
+    max-width: none;
+    flex: 1 0 45%; /* Two columns on mobile */
   }
 }
 
