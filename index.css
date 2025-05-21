@@ -3,7 +3,7 @@
   --secondary-color: #ff006e;
   --highlight-color: #ff006e;
   --accent-color: #ff6d00;
-  --search-button-color: #ff6d00;
+  --search-button-color: #ff006e;
   --background-color: rgba(255, 255, 255, 0.1);
   --border-color: rgba(255, 255, 255, 0.2);
   --shadow-color: rgba(0, 0, 0, 0.05);
@@ -13,6 +13,8 @@
   --hover-bg: #f5f5f5;
   --primary-light: rgba(58, 134, 255, 0.05);
   --text-light: #666;
+  --card-bg: #ffffff;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -28,10 +30,13 @@ body {
   min-height: 100vh;
 }
 
+/* ===== HERO SECTION ===== */
 .hero-section {
   position: relative;
-  overflow: hidden;
-  min-height: 60vh;
+  /* Remove the overflow: hidden that was causing the dropdown issue */
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .background-image {
@@ -45,15 +50,17 @@ body {
   z-index: -1;
 }
 
-/* Header styles */
+/* ===== HEADER STYLES ===== */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  padding: 1.5rem 19%;
   position: relative;
   z-index: 10;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -65,9 +72,10 @@ header {
   text-decoration: none;
 }
 
-.logo i {
-  margin-right: 10px;
-  color: var(--primary-color);
+.logo img {
+  height: auto;
+  max-height: 40px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .auth-buttons {
@@ -86,7 +94,6 @@ header {
 }
 
 .login {
-  color: var(--dark-text);
   color: var(--light-text);
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
@@ -103,39 +110,41 @@ header {
   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-/* Search widget styles */
+/* ===== SEARCH CONTAINER ===== */
 .search-container {
   max-width: 1200px;
   width: 90%;
   margin: 3rem auto;
   position: relative;
   z-index: 10;
+  flex-grow: 1;
 }
 
 .search-widget {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 24px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 8px 32px var(--shadow-color);
+  box-shadow: var(--card-shadow);
   padding: 2rem;
   color: var(--text-color);
 }
 
-/* NEW STYLES FOR TABS: Styled like Travel Type Tabs */
+/* ===== TABS ===== */
 .search-tabs {
   display: flex;
   gap: 12px;
   margin-bottom: 1.5rem;
   border-bottom: none;
+  flex-wrap: wrap;
 }
 
 .tab {
   padding: 10px 24px;
   border-radius: 30px;
   border: 1px solid var(--border-color);
-  background-color: white;
+  background-color: var(--card-bg);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -151,20 +160,11 @@ header {
 }
 
 .tab.active {
-  /* background-color: var(--primary-light); */
-  /* border-color: var(--primary-color); */
-  /* color: var(--primary-color); */
-
   transform: scale(1.05);
   box-shadow: 0 2px 8px rgba(41, 98, 255, 0.15);
-
   background-color: var(--highlight-color);
-  color: #f7f7f7;
+  color: var(--light-text);
   border-color: var(--highlight-color);
-}
-
-.tab.active::after {
-  content: none;
 }
 
 .search-content {
@@ -175,6 +175,7 @@ header {
   display: block;
 }
 
+/* ===== SEARCH FIELDS ===== */
 .search-row {
   display: flex;
   gap: 1rem;
@@ -186,6 +187,13 @@ header {
   flex: 1;
   min-width: 150px;
   position: relative;
+}
+
+/* Make From and To fields wider */
+.search-field:nth-child(1),
+.search-field:nth-child(2),
+.search-field:nth-child(5) {
+  flex: 2; /* Double the flex value compared to other fields */
 }
 
 .search-field label {
@@ -203,12 +211,20 @@ header {
   background-color: white;
   color: var(--text-color);
   font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
 }
 
 .search-input::placeholder {
   color: #999;
 }
 
+/* ===== SWAP BUTTON ===== */
 .swap-btn {
   background-color: var(--primary-color);
   color: white;
@@ -222,7 +238,7 @@ header {
   cursor: pointer;
   position: absolute;
   top: 32px;
-  left: calc(-4% - 20px);
+  left: calc(-4% - 18px);
   z-index: 1;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -246,50 +262,76 @@ header {
   }
 }
 
-.checkbox-field {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.search-button {
-  background-color: var(--search-button-color);
-  background-color: var(--highlight-color);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-  /* box-shadow: 0 4px 15px rgba(255, 109, 0, 0.3); */
-  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.search-button:hover {
-  transform: translateY(-3px);
-  /* box-shadow: 0 8px 25px rgba(255, 109, 0, 0.5); */
-  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.5);
-}
-
-.search-button:active {
-  transform: translateY(-1px);
-  /* box-shadow: 0 8px 25px rgba(255, 109, 0, 0.2); */
-  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.2);
-}
-
-/* Dropdown styles */
+/* ===== DROPDOWN STYLES ===== */
 .dropdown {
   position: relative;
 }
 
-/* NEW STYLES FOR CABIN CLASS: Class options styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 310px;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  z-index: 20;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  /* Ensures dropdown is visible even with overflow: hidden elsewhere */
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+/* ===== PASSENGER COUNTER ===== */
+.passenger-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.passenger-counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.counter-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.counter-btn:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.counter-value {
+  width: 30px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ===== CABIN CLASS ===== */
 .cabin-class {
   margin-top: 24px;
 }
@@ -298,7 +340,7 @@ header {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 0.9rem;
   color: var(--text-color);
 }
 
@@ -307,7 +349,6 @@ header {
   gap: 8px;
   margin-top: 0.5rem;
   flex-wrap: wrap;
-  flex-direction: column;
 }
 
 .radio-option {
@@ -347,13 +388,14 @@ header {
   font-weight: bold;
 }
 
-/* NEW STYLES FOR SPECIAL OFFERS: Desktop version */
+/* ===== SPECIAL OFFERS ===== */
 .special-offers-container {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .special-offers-container::before {
@@ -365,14 +407,15 @@ header {
 }
 
 .offer-option {
-  flex: 1;
+  /* flex: 1; */
   min-width: auto;
 }
 
 .offer-label {
   padding: 8px 16px;
-  /* border: 1px solid var(--border-color); */
-  border: 1px solid var(--primary-color);
+  /* border: 1px solid var(--primary-color); */
+  /* border: 1px solid var(--highlight-color); */
+  border: 1px solid #e0e0e0;
   border-radius: 20px;
   font-size: 13px;
   cursor: pointer;
@@ -387,21 +430,17 @@ header {
 }
 
 .offer-label:hover {
-  border-color: var(--highlight-color);
+  /* border-color: var(--highlight-color); */
+  border: 1px solid var(--primary-color);
+  background-color: var(--hover-bg);
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
 .offer-radio:checked + .offer-label {
-  border-color: var(--highlight-color);
-  color: var(--highlight-color);
-  font-weight: 500;
-  background-color: rgba(255, 0, 110, 0.05);
-
-  /* new styles */
-  color: rgba(255, 0, 110, 0.05);
   color: #f7f7f7;
   background-color: var(--highlight-color);
+  border-color: var(--highlight-color);
 }
 
 .offer-title {
@@ -416,59 +455,35 @@ header {
   display: none;
 }
 
-.passenger-type {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
-}
-
-.passenger-counter {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.counter-btn {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 50%;
-  cursor: pointer;
+/* ===== SEARCH BUTTON ===== */
+.search-button {
+  background-color: var(--highlight-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
   font-size: 1rem;
-  color: var(--text-color);
-}
-
-.counter-value {
-  width: 30px;
-  text-align: center;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 310px;
-  background-color: white;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 8px 32px var(--shadow-color);
-  z-index: 20;
-  padding: 1rem;
-  margin-top: 0.5rem;
-}
-
-.dropdown.active .dropdown-content {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Chatbot */
+.search-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
+}
+
+.search-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.2);
+}
+
+/* ===== CHATBOT ===== */
 .chatbot {
   position: fixed;
   bottom: 2rem;
@@ -490,9 +505,10 @@ header {
 
 .chatbot:hover {
   transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(58, 134, 255, 0.3);
 }
 
-/* Features section */
+/* ===== FEATURES SECTION ===== */
 .features-section {
   background-color: white;
   padding: 5rem 0;
@@ -509,11 +525,22 @@ header {
   font-size: 2rem;
   margin-bottom: 3rem;
   color: var(--text-color);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: var(--highlight-color);
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 }
 
@@ -523,6 +550,7 @@ header {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   padding: 2rem;
   transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .feature-card:hover {
@@ -534,6 +562,10 @@ header {
   font-size: 2.5rem;
   color: var(--primary-color);
   margin-bottom: 1.5rem;
+  display: inline-block;
+  background-color: var(--primary-light);
+  padding: 1rem;
+  border-radius: 16px;
 }
 
 .feature-title {
@@ -547,93 +579,82 @@ header {
   line-height: 1.6;
 }
 
-/* Responsive adjustments */
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   header {
     padding: 1.5rem 5%;
   }
 
-  /* Mobile travel type tabs */
   .search-tabs {
-    display: flex;
     justify-content: center;
-    margin-bottom: 16px;
     background-color: #f5f5f5;
     border-radius: 30px;
     padding: 4px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: none;
   }
 
   .tab {
-    padding: 8px 20px;
-    border-radius: 30px;
+    padding: 8px 16px;
     border: none;
     background-color: transparent;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    color: #666;
-  }
-
-  .tab:hover {
-    color: var(--highlight-color);
+    font-size: 13px;
   }
 
   .tab.active {
     background-color: white;
     color: var(--text-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .tab.active::after {
-    content: none;
+    transform: none;
   }
 
   .search-row {
     flex-direction: column;
   }
 
+  /* Reset the From/To wider fields for mobile */
+  .search-field:nth-child(1),
+  .search-field:nth-child(2) {
+    flex: 1;
+  }
+
   .swap-btn {
-    display: none;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    position: relative;
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  .swap-btn:hover {
+    transform: translateX(-50%) rotate(180deg);
   }
 
   .dropdown-content {
-    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 350px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
   }
 
-  /* Mobile cabin class styling */
-  .radio-group {
-    flex-wrap: wrap;
-  }
-
-  .radio-option {
-    min-width: calc(50% - 4px);
-  }
-
-  .radio-option span {
-    padding: 10px 8px;
-  }
-
-  /* KEEP ORIGINAL MOBILE SPECIAL OFFERS STYLING */
   .special-offers-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
   }
 
   .special-offers-container::before {
-    content: none;
-  }
-
-  .offer-option {
-    flex: 1;
-    min-width: 150px;
+    content: "Special Offers:";
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
   }
 
   .offer-label {
@@ -641,22 +662,31 @@ header {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
     height: 100%;
   }
 
-  .offer-title {
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
   .offer-subtitle {
-    font-size: 0.8rem;
-    color: #777;
+    display: block;
     margin-left: 0;
   }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation effects */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-content.active {
+  animation: fadeIn 0.3s ease forwards;
 }
