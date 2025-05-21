@@ -474,7 +474,7 @@ header {
 
 .offer-label {
   padding: 8px 16px;
-  border: 1px solid var(--primary-color);
+  border: 1px solid transparent;
   border-radius: 20px;
   font-size: 13px;
   cursor: pointer;
@@ -489,7 +489,8 @@ header {
 }
 
 .offer-label:hover {
-  border-color: var(--highlight-color);
+  /* border-color: var(--highlight-color); */
+  border: 1px solid var(--highlight-color);
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
@@ -507,7 +508,6 @@ header {
 
 .offer-subtitle {
   font-size: 0.8rem;
-  color: #777;
   margin-left: 5px;
   display: none;
 }
@@ -685,6 +685,7 @@ header {
     position: relative;
     display: flex;
     margin-bottom: 16px;
+    display: none;
   }
 
   .swap-btn:hover {

@@ -243,17 +243,93 @@ function initializeSwapButtons() {
 
       // Get current values
       const fromValue = fromInput.value;
-      const toValue = toInput.value;
+      const toValue = toInput.value || "Enter city or airport";
 
-      // Swap the values
-      fromInput.value = toValue;
-      toInput.value = fromValue;
+      // Create overlay elements to animate the text
+      const fromOverlay = document.createElement("div");
+      const toOverlay = document.createElement("div");
 
-      // Visual feedback
+      // Style the overlays to match the input text
+      fromOverlay.style.position = "absolute";
+      fromOverlay.style.pointerEvents = "none";
+      fromOverlay.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      fromOverlay.style.zIndex = "10";
+      fromOverlay.textContent = fromValue;
+
+      toOverlay.style.position = "absolute";
+      toOverlay.style.pointerEvents = "none";
+      toOverlay.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      toOverlay.style.zIndex = "10";
+      toOverlay.textContent = toValue;
+
+      // Position overlays precisely over the text in the input fields
+      const fromRect = fromInput.getBoundingClientRect();
+      fromOverlay.style.left = fromRect.left + "px";
+      fromOverlay.style.top = fromRect.top + "px";
+      fromOverlay.style.width = fromRect.width + "px";
+      fromOverlay.style.height = fromRect.height + "px";
+      fromOverlay.style.padding = window.getComputedStyle(fromInput).padding;
+      fromOverlay.style.fontSize = window.getComputedStyle(fromInput).fontSize;
+      fromOverlay.style.fontFamily =
+        window.getComputedStyle(fromInput).fontFamily;
+      fromOverlay.style.lineHeight =
+        window.getComputedStyle(fromInput).lineHeight;
+      fromOverlay.style.color = window.getComputedStyle(fromInput).color;
+      fromOverlay.style.display = "flex";
+      fromOverlay.style.alignItems = "center";
+
+      const toRect = toInput.getBoundingClientRect();
+      toOverlay.style.left = toRect.left + "px";
+      toOverlay.style.top = toRect.top + "px";
+      toOverlay.style.width = toRect.width + "px";
+      toOverlay.style.height = toRect.height + "px";
+      toOverlay.style.padding = window.getComputedStyle(toInput).padding;
+      toOverlay.style.fontSize = window.getComputedStyle(toInput).fontSize;
+      toOverlay.style.fontFamily = window.getComputedStyle(toInput).fontFamily;
+      toOverlay.style.lineHeight = window.getComputedStyle(toInput).lineHeight;
+      toOverlay.style.color = window.getComputedStyle(toInput).color;
+      toOverlay.style.display = "flex";
+      toOverlay.style.alignItems = "center";
+
+      // Add overlays to the document
+      document.body.appendChild(fromOverlay);
+      document.body.appendChild(toOverlay);
+
+      // Hide text in the original inputs
+      fromInput.style.color = "transparent";
+      toInput.style.color = "transparent";
+
+      // Add the rotating animation to the button
       btn.classList.add("swap-active");
+
+      // Animate the overlays
       setTimeout(() => {
-        btn.classList.remove("swap-active");
-      }, 500);
+        // Move the text visuals in opposite directions and fade out
+        fromOverlay.style.transform = "translateY(20px)";
+        toOverlay.style.transform = "translateY(-20px)";
+        fromOverlay.style.opacity = "0";
+        toOverlay.style.opacity = "0";
+
+        // After animation completes, swap the values and restore inputs
+        setTimeout(() => {
+          // Swap the values in the actual input fields
+          fromInput.value = toValue;
+          toInput.value = fromValue;
+
+          // Remove the overlays
+          document.body.removeChild(fromOverlay);
+          document.body.removeChild(toOverlay);
+
+          // Restore text color in the original inputs
+          fromInput.style.color = "";
+          toInput.style.color = "";
+
+          // Remove animation class from button
+          setTimeout(() => {
+            btn.classList.remove("swap-active");
+          }, 300);
+        }, 300);
+      }, 50);
     });
   });
 }
