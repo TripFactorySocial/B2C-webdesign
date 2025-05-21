@@ -191,7 +191,8 @@ header {
 
 /* Make From and To fields wider */
 .search-field:nth-child(1),
-.search-field:nth-child(2) {
+.search-field:nth-child(2),
+.search-field:nth-child(5) {
   flex: 2; /* Double the flex value compared to other fields */
 }
 
@@ -271,8 +272,8 @@ header {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 310px;
-  width: 360px;
+  /* width: 310px; */
+  width: 350px;
   background-color: white;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
@@ -337,7 +338,8 @@ header {
   background-color: var(--secondary-color);
   border-color: var(--light-text);
   color: var(--light-text);
-  animation: rotateFull 0.5s ease;
+  /* animation: rotateFull 0.5s ease; */
+  animation: 0.2s ease;
 }
 
 .counter-value {
@@ -380,7 +382,8 @@ header {
   display: flex;
   gap: 10px;
   margin-top: 0.5rem;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -465,7 +468,7 @@ header {
 }
 
 .offer-option {
-  flex: 1;
+  /* flex: 1; */
   min-width: auto;
 }
 
@@ -669,7 +672,8 @@ header {
 
   /* Reset the From/To wider fields for mobile */
   .search-field:nth-child(1),
-  .search-field:nth-child(2) {
+  .search-field:nth-child(2),
+  .search-field:nth-child(5) {
     flex: 1;
   }
 
