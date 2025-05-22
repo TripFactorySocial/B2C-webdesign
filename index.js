@@ -12,6 +12,10 @@ const datePickers = document.querySelectorAll(".date-picker");
 const chatbot = document.querySelector(".chatbot");
 const oneWayReturnDate = document.getElementById("return-date-1");
 const offerLabels = document.querySelectorAll(".offer-label");
+const destinationsWrapper = document.querySelector(".destinations-wrapper");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+const footerToggles = document.querySelectorAll(".mobile-toggle");
 
 // Initialize the application
 function initApp() {
@@ -24,6 +28,8 @@ function initApp() {
   initializeDatePickers();
   initializeChatbot();
   initializeOfferSelection();
+  initializeDestinationSlider();
+  initializeFooterToggle();
 
   // Close dropdowns when clicking outside
   document.addEventListener("click", handleOutsideClick);
@@ -376,6 +382,67 @@ function initializeDatePickers() {
 function initializeChatbot() {
   chatbot.addEventListener("click", () => {
     alert("Chatbot would appear here to help with your booking.");
+  });
+}
+
+// Destination slider functionality
+function initializeDestinationSlider() {
+  if (!destinationsWrapper || !prevBtn || !nextBtn) return;
+
+  const scrollAmount = 300;
+
+  prevBtn.addEventListener("click", () => {
+    destinationsWrapper.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
+    });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    destinationsWrapper.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  });
+
+  // Add click functionality to destination items
+  const destinationItems = document.querySelectorAll(".destination-item");
+  destinationItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const code = item.querySelector(".destination-code").textContent;
+      alert(`Explore flights to ${code}`);
+    });
+  });
+}
+
+// Footer collapse functionality
+function initializeFooterToggle() {
+  footerToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const section = toggle.getAttribute("data-section");
+      const content = document.querySelector(`[data-content="${section}"]`);
+
+      if (content) {
+        // Toggle active state
+        toggle.classList.toggle("active");
+        content.classList.toggle("active");
+
+        // Close other sections (optional - for accordion behavior)
+        // Uncomment the lines below if you want accordion behavior
+        /*
+        footerToggles.forEach((otherToggle) => {
+          if (otherToggle !== toggle) {
+            otherToggle.classList.remove("active");
+            const otherSection = otherToggle.getAttribute("data-section");
+            const otherContent = document.querySelector(`[data-content="${otherSection}"]`);
+            if (otherContent) {
+              otherContent.classList.remove("active");
+            }
+          }
+        });
+        */
+      }
+    });
   });
 }
 
