@@ -30,6 +30,7 @@ function initApp() {
   initializeOfferSelection();
   initializeDestinationSlider();
   initializeFooterToggle();
+  initializeOffersCarousel();
 
   // Close dropdowns when clicking outside
   document.addEventListener("click", handleOutsideClick);
@@ -444,6 +445,144 @@ function initializeFooterToggle() {
       }
     });
   });
+}
+
+// Offers Carousel functionality
+function initializeOffersCarousel() {
+  const carousel = document.querySelector(".offers-carousel");
+  const prevButton = document.querySelector(".offers-nav-prev");
+  const nextButton = document.querySelector(".offers-nav-next");
+  const indicators = document.querySelectorAll(".indicator");
+
+  if (!carousel || !prevButton || !nextButton) return;
+
+  const cards = carousel.querySelectorAll(".offer-card");
+  let currentIndex = 0;
+  let autoPlayInterval;
+  const cardWidth = 320 + 24; // card width + gap
+  const visibleCards = Math.floor(carousel.offsetWidth / cardWidth);
+  const maxIndex = Math.max(0, cards.length - visibleCards);
+
+  // Update carousel position
+  function updateCarousel() {
+    const translateX = -(currentIndex * cardWidth);
+    carousel.style.transform = `translateX(${translateX}px)`;
+
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle(
+        "active",
+        index === Math.floor(currentIndex / visibleCards)
+      );
+    });
+
+    // Update button states
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex >= maxIndex;
+  }
+
+  // Go to specific slide
+  function goToSlide(index) {
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateCarousel();
+  }
+
+  // Next slide
+  function nextSlide() {
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+    } else {
+      currentIndex = 0; // Loop back to start
+    }
+    updateCarousel();
+  }
+
+  // Previous slide
+  function prevSlide() {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = maxIndex; // Loop to end
+    }
+    updateCarousel();
+  }
+
+  // Auto play
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayInterval = setInterval(nextSlide, 4000);
+  }
+
+  // Stop auto play
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+    }
+  }
+
+  // Event listeners
+  prevButton.addEventListener("click", () => {
+    prevSlide();
+    stopAutoPlay();
+    startAutoPlay();
+  });
+
+  nextButton.addEventListener("click", () => {
+    nextSlide();
+    stopAutoPlay();
+    startAutoPlay();
+  });
+
+  // Indicator clicks
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => {
+      goToSlide(index * visibleCards);
+      stopAutoPlay();
+      startAutoPlay();
+    });
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carousel.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+    stopAutoPlay();
+  });
+
+  carousel.addEventListener("touchmove", (e) => {
+    touchEndX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchend", () => {
+    const swipeDistance = touchStartX - touchEndX;
+    if (Math.abs(swipeDistance) > 50) {
+      if (swipeDistance > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    startAutoPlay();
+  });
+
+  // Pause on hover
+  carousel.addEventListener("mouseenter", stopAutoPlay);
+  carousel.addEventListener("mouseleave", startAutoPlay);
+
+  // Handle resize
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateCarousel();
+    }, 250);
+  });
+
+  // Initialize
+  updateCarousel();
+  startAutoPlay();
 }
 
 // Initialize the app when DOM is fully loaded

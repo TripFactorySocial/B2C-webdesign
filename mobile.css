@@ -206,8 +206,40 @@
   }
 
   /* Offers Mobile */
-  .offers-grid {
-    grid-template-columns: 1fr;
+  .offers-carousel-container {
+    margin-top: 1.5rem;
+  }
+
+  .offer-card {
+    flex: 0 0 280px;
+    min-width: 280px;
+  }
+
+  .offers-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .offers-nav-prev {
+    left: -18px;
+  }
+
+  .offers-nav-next {
+    right: -18px;
+  }
+
+  .offers-carousel-wrapper {
+    margin: 0 -1rem;
+  }
+
+  .offers-carousel {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .offers-indicators {
+    margin-top: 1.5rem;
   }
 
   .route-announcement {

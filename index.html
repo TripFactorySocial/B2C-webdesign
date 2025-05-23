@@ -487,87 +487,146 @@
       <div class="offers-container">
         <h2 class="section-title">Offers For You</h2>
 
-        <div class="offers-grid">
-          <div class="offer-card air-india">
-            <div class="offer-header">
-              <img
-                src="/api/placeholder/60/30"
-                alt="Air India"
-                class="airline-logo"
-              />
-              <span class="offer-badge">SALE</span>
-            </div>
-            <div class="offer-content">
-              <h3>Domestic Fares starting at ₹1,999</h3>
-              <p>International Fares starting at ₹11,999</p>
-              <div class="offer-validity">Valid till 24th May</div>
-            </div>
-            <div class="offer-visual">
-              <i class="fas fa-plane offer-icon"></i>
+        <div class="offers-carousel-container">
+          <button
+            class="offers-nav offers-nav-prev"
+            aria-label="Previous offers"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="offers-carousel-wrapper">
+            <div class="offers-carousel">
+              <div class="offer-card air-india">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="Air India"
+                    class="airline-logo"
+                  />
+                  <span class="offer-badge">SALE</span>
+                </div>
+                <div class="offer-content">
+                  <h3>Domestic Fares starting at ₹1,999</h3>
+                  <p>International Fares starting at ₹11,999</p>
+                  <div class="offer-validity">Valid till 24th May</div>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-plane offer-icon"></i>
+                </div>
+              </div>
+
+              <div class="offer-card indigo">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="IndiGo"
+                    class="airline-logo"
+                  />
+                  <span class="offer-badge flash">FLASH SALE</span>
+                </div>
+                <div class="offer-content">
+                  <h3>Fares starting from ₹1,375</h3>
+                  <div class="offer-validity">Valid till 25th May</div>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-bolt offer-icon"></i>
+                </div>
+              </div>
+
+              <div class="offer-card hdfc">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="HDFC Bank"
+                    class="bank-logo"
+                  />
+                </div>
+                <div class="offer-content">
+                  <h3>Get up to ₹2,000 Off</h3>
+                  <p>on Domestic Flights with HDFC Bank Cards EMI</p>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-credit-card offer-icon"></i>
+                </div>
+              </div>
+
+              <div class="offer-card kotak">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="Kotak"
+                    class="bank-logo"
+                  />
+                </div>
+                <div class="offer-content">
+                  <h3>Flat 12% Off</h3>
+                  <p>on Domestic Flights with Kotak Retail Credit Card</p>
+                  <div class="offer-feature">+ Interest Free EMI</div>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-percentage offer-icon"></i>
+                </div>
+              </div>
+
+              <div class="offer-card special">
+                <div class="offer-header"></div>
+                <div class="offer-content">
+                  <h3>Flight and Hotel bookings suspended</h3>
+                  <p>for Turkey, Azerbaijan, and China</p>
+                  <button class="know-more-btn">Know More</button>
+                </div>
+              </div>
+
+              <div class="offer-card vistara">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="Vistara"
+                    class="airline-logo"
+                  />
+                  <span class="offer-badge">LIMITED TIME</span>
+                </div>
+                <div class="offer-content">
+                  <h3>Premium Economy Special</h3>
+                  <p>Upgrade to Premium Economy at ₹4,999</p>
+                  <div class="offer-validity">Valid till 30th May</div>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-star offer-icon"></i>
+                </div>
+              </div>
+
+              <div class="offer-card axis">
+                <div class="offer-header">
+                  <img
+                    src="/api/placeholder/60/30"
+                    alt="Axis Bank"
+                    class="bank-logo"
+                  />
+                </div>
+                <div class="offer-content">
+                  <h3>5X Rewards on International Flights</h3>
+                  <p>Plus get 10% instant discount</p>
+                  <div class="offer-feature">Max discount ₹5,000</div>
+                </div>
+                <div class="offer-visual">
+                  <i class="fas fa-gift offer-icon"></i>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="offer-card indigo">
-            <div class="offer-header">
-              <img
-                src="/api/placeholder/60/30"
-                alt="IndiGo"
-                class="airline-logo"
-              />
-              <span class="offer-badge flash">FLASH SALE</span>
-            </div>
-            <div class="offer-content">
-              <h3>Fares starting from ₹1,375</h3>
-              <div class="offer-validity">Valid till 25th May</div>
-            </div>
-            <div class="offer-visual">
-              <i class="fas fa-bolt offer-icon"></i>
-            </div>
-          </div>
+          <button class="offers-nav offers-nav-next" aria-label="Next offers">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
 
-          <div class="offer-card hdfc">
-            <div class="offer-header">
-              <img
-                src="/api/placeholder/60/30"
-                alt="HDFC Bank"
-                class="bank-logo"
-              />
-            </div>
-            <div class="offer-content">
-              <h3>Get up to ₹2,000 Off</h3>
-              <p>on Domestic Flights with HDFC Bank Cards EMI</p>
-            </div>
-            <div class="offer-visual">
-              <i class="fas fa-credit-card offer-icon"></i>
-            </div>
-          </div>
-
-          <div class="offer-card kotak">
-            <div class="offer-header">
-              <img src="/api/placeholder/60/30" alt="Kotak" class="bank-logo" />
-            </div>
-            <div class="offer-content">
-              <h3>Flat 12% Off</h3>
-              <p>on Domestic Flights with Kotak Retail Credit Card</p>
-              <div class="offer-feature">+ Interest Free EMI</div>
-            </div>
-            <div class="offer-visual">
-              <i class="fas fa-percentage offer-icon"></i>
-            </div>
-          </div>
-
-          <div class="offer-card special">
-            <div class="offer-header">
-              <span class="solidarity-badge"
-                >In solidarity with our nation</span
-              >
-            </div>
-            <div class="offer-content">
-              <h3>Flight and Hotel bookings suspended</h3>
-              <p>for Turkey, Azerbaijan, and China</p>
-              <button class="know-more-btn">Know More</button>
-            </div>
-          </div>
+        <!-- Carousel indicators -->
+        <div class="offers-indicators">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
         </div>
       </div>
     </section>
@@ -601,6 +660,12 @@
                 <a href="#">Mumbai to Chennai Flights</a>
                 <a href="#">Kolkata to Delhi Flights</a>
               </div>
+            </div>
+          </div>
+
+          <div class="footer-section routes-section">
+            <h3 class="footer-title">Popular Domestic Routes</h3>
+            <div class="routes-grid">
               <div class="route-links">
                 <a href="#">Mumbai to Bangalore Flights</a>
                 <a href="#">Pune to Mumbai Flights</a>
@@ -629,12 +694,12 @@
             </h3>
             <div class="footer-links" data-content="company">
               <a href="#">About Us</a>
-              <a href="#">Our Story</a>
+              <!-- <a href="#">Our Story</a> -->
               <a href="#">Careers</a>
-              <a href="#">Press</a>
-              <a href="#">Investor Relations</a>
-              <a href="#">Leadership Team</a>
-              <a href="#">Corporate Social Responsibility</a>
+              <!-- <a href="#">Press</a> -->
+              <!-- <a href="#">Investor Relations</a> -->
+              <!-- <a href="#">Leadership Team</a> -->
+              <!-- <a href="#">Corporate Social Responsibility</a> -->
             </div>
           </div>
 
@@ -669,12 +734,12 @@
             </h3>
             <div class="footer-links" data-content="services">
               <a href="#">Flight Booking</a>
-              <a href="#">Hotel Booking</a>
-              <a href="#">Car Rental</a>
+              <!-- <a href="#">Hotel Booking</a> -->
+              <!-- <a href="#">Car Rental</a> -->
               <a href="#">Travel Insurance</a>
               <a href="#">Airport Transfer</a>
               <a href="#">Holiday Packages</a>
-              <a href="#">Visa Services</a>
+              <!-- <a href="#">Visa Services</a> -->
             </div>
           </div>
         </div>
@@ -686,7 +751,7 @@
           <div class="footer-bottom-content">
             <div class="left-section">
               <div class="copyright">
-                <span>&copy;2025 SkyJourney</span>
+                <span>&copy;2025 Holidays91</span>
               </div>
               <div class="legal-links">
                 <a href="#">Privacy Policy</a>
