@@ -430,18 +430,20 @@ function initializeFooterToggle() {
 
         // Close other sections (optional - for accordion behavior)
         // Uncomment the lines below if you want accordion behavior
-        /*
+        // /*
         footerToggles.forEach((otherToggle) => {
           if (otherToggle !== toggle) {
             otherToggle.classList.remove("active");
             const otherSection = otherToggle.getAttribute("data-section");
-            const otherContent = document.querySelector(`[data-content="${otherSection}"]`);
+            const otherContent = document.querySelector(
+              `[data-content="${otherSection}"]`
+            );
             if (otherContent) {
               otherContent.classList.remove("active");
             }
           }
         });
-        */
+        // */
       }
     });
   });
